@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="DetailsModel"
+            type="org.yara.movies.data.remote.model.response.details.Details" />
+
+        <variable
+            name="loadingObservable"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/poster"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:padding="16dp"
+                android:src="@drawable/ic_place_holder_squar"
+                app:imageUrl="@{DetailsModel.poster}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:background="@drawable/container_background"
+                app:layout_constraintTop_toBottomOf="@id/poster">
+
+            <LinearLayout
+                android:id="@+id/linear_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:layout_marginRight="8dp"
+                android:padding="4dp"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/writer">
+
+                <TextView
+                    android:id="@+id/year_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@{DetailsModel.year}"
+                    android:textColor="@color/white"
+                    android:padding="4dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/rated_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:text="@string/rated"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/year"
+                    app:layout_constraintTop_toTopOf="@id/year" />
+
+                <TextView
+                    android:id="@+id/rated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@{DetailsModel.rated}"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/rated_label"
+                    app:layout_constraintLeft_toRightOf="@id/rated_label"
+                    app:layout_constraintTop_toTopOf="@id/rated_label" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/title"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{DetailsModel.title}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:lineSpacingMultiplier="1.5"
+                app:layout_constraintBottom_toBottomOf="@id/title_label"
+                app:layout_constraintLeft_toRightOf="@id/title_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_label" />
+
+            <TextView
+                android:id="@+id/director_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/director"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:lineSpacingExtra="1.5dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <TextView
+                android:id="@+id/director"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{DetailsModel.director}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:padding="4dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:lineSpacingMultiplier="1.5"
+                app:layout_constraintBottom_toBottomOf="@id/director_label"
+                app:layout_constraintLeft_toRightOf="@id/director_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/director_label" />
+
+            <TextView
+                android:id="@+id/actors_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/actors"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/director" />
+
+
+            <TextView
+                android:id="@+id/actors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{DetailsModel.actors}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:layout_marginRight="8dp"
+                android:lineSpacingMultiplier="1.5"
+                app:layout_constraintLeft_toRightOf="@id/actors_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/actors_label" />
+
+            <TextView
+                android:id="@+id/writer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/writer"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actors" />
+
+            <TextView
+                android:id="@+id/writer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{DetailsModel.writer}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:padding="4dp"
+                android:lineSpacingMultiplier="1.5"
+                android:textStyle="bold"
+                android:layout_marginRight="8dp"
+                app:layout_constraintLeft_toRightOf="@id/writer_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/writer_label" />
+
+            <TextView
+                android:id="@+id/awards_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/awards"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_details" />
+
+            <TextView
+                android:id="@+id/awards"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@{DetailsModel.awards}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:padding="4dp"
+                android:lineSpacingMultiplier="1.5"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="8dp"
+                app:layout_constraintLeft_toRightOf="@id/awards_label"
+                app:layout_constraintTop_toTopOf="@id/awards_label" />
+
+            <TextView
+                android:id="@+id/plot_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/plot"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/awards" />
+
+            <TextView
+                android:id="@+id/plot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@{DetailsModel.plot}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="8dp"
+                android:lineSpacingMultiplier="1.5"
+                app:layout_constraintLeft_toRightOf="@id/plot_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/plot_label" />
+
+            <include
+                android:id="@+id/includeLoading"
+                layout="@layout/redirect_loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:isLoading="@{loadingObservable}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
